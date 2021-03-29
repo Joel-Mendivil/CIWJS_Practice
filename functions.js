@@ -10,7 +10,7 @@
 // langOne.addEventListener('mouseout', () => {
 //     langOne.classList.remove("progress-bar-striped")
 // })
-    
+
 // langTwo.addEventListener('mouseover', () => {
 //     langTwo.classList.add("progress-bar-striped");
 // })
@@ -21,16 +21,16 @@
 
 
 //Leet Code Problem 66 /////////////////////////////////////////////////////////////////////////
-let digits = [1,2,3];
-var plusOne = function(digits) {
-    for(let i = digits.length - 1; i >= 0; i--){
-        if(digits[i] < 9){
-          digits[i] = digits[i] + 1;
+let digits = [1, 2, 3];
+var plusOne = function (digits) {
+    for (let i = digits.length - 1; i >= 0; i--) {
+        if (digits[i] < 9) {
+            digits[i] = digits[i] + 1;
             return digits;
         } else {
             digits[i] = 0;
         }
-   }  
+    }
     digits.unshift(1);
     return digits;
 };
@@ -42,9 +42,9 @@ const sortedArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
 const linear = (arr, target) => {
     let steps = 0;
 
-    for (let i =0; i < arr.length; i++){
+    for (let i = 0; i < arr.length; i++) {
         steps++;
-        if(arr[i] === target) return `Found: ${arr[i]} in ${steps} steps`;
+        if (arr[i] === target) return `Found: ${arr[i]} in ${steps} steps`;
     };
 };
 
@@ -58,15 +58,15 @@ const binary = (arr, target) => {
     let pivot = Math.floor((start + end) / 2);
     let steps = 0;
 
-    for(let i = 0; i < arr.length; i++){
-        if(arr[pivot] !== target){
-            if(target < arr[pivot]) end = pivot;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[pivot] !== target) {
+            if (target < arr[pivot]) end = pivot;
             else start = pivot;
             pivot = Math.floor((start + end) / 2);
             steps++;
         };
 
-        if(arr[pivot] === target) return `Found: ${target} in ${steps} steps`;
+        if (arr[pivot] === target) return `Found: ${target} in ${steps} steps`;
     };
 
     return 'Nothing Found';
@@ -81,8 +81,22 @@ console.log(binary(sortedArr, 43)); //5 steps in 8 Milliseconds
  * @param {number} x
  * @return {boolean}
  */
-var isPalindrome = function(x) {
-    return x == x.toString().split('').reverse().join('');
+var isPalindrome = function (x) {
+    if (x < 0) {
+        return false;
+    }
+
+    let char = x.toString();
+    let i = 0;
+    let j = char.length - 1;
+
+    while (i <= j) {
+        if (!(char[i++] === char[j--])) {
+            return false;
+        }
+    }
+
+    return true;
 };
 
 //Leet Code Problem 34 /////////////////////////////////////////////////////////////////////////
@@ -91,12 +105,12 @@ var isPalindrome = function(x) {
  * @param {number} target
  * @return {number[]}
  */
-var searchRange = function(nums, target) {
+var searchRange = function (nums, target) {
     const length = nums.length - 1;
     let start = 0;
     let end = length;
     let center;
-    
+
     // get the center
     while (start <= end) {
         center = Math.floor((start + end) / 2);
@@ -110,7 +124,7 @@ var searchRange = function(nums, target) {
     }
 
     if (start > end) return [-1, -1];
-    
+
     // find the edges
     while (nums[start - 1] === target) start--;
     while (nums[end + 1] === target) end++;
@@ -122,13 +136,18 @@ var searchRange = function(nums, target) {
  * @param {number} n
  * @return {string[]}
  */
-var fizzBuzz = function(n) {
-    let result = [];
-    for (i = 1; i <= n; i++) {
-        if (i % 3 == 0 && i % 5 == 0) result.push("FizzBuzz");
-        else if (i % 3 == 0) result.push("Fizz");
-        else if (i % 5 == 0) result.push("Buzz");
-        else result.push(i + "");
+var fizzBuzz = function (n) {
+    const output = [];
+    for (let i = 1; i <= n; i++) {
+        if (i % 15 === 0) {
+            output.push("FizzBuzz")
+        } else if (i % 5 === 0) {
+            output.push("Buzz")
+        } else if (i % 3 === 0) {
+            output.push("Fizz")
+        } else {
+            output.push(String(i));
+        }
     }
-    return result;
+    return output;
 };
