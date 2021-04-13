@@ -37,7 +37,7 @@
     <!--New Code-->
     <form action="">
         <p>Please enter your info</p>
-        <label for="name">Full name</label>
+        <label for="stuName">Full name</label>
             <input id='name' type="text">
         <label for="height">Height</label>
             <input id='height' type="text">
@@ -46,7 +46,55 @@
         <label for="fav color">Fav Color</label>
             <input id='fav color' type="text">
     </form>
-    <button onclick="run()">Done</button>
+    <button id="btn" onclick="run()">Done</button>
+    <br>
+    <br>
+    <br>
+    <script>
+        //create an array to store each student
+        let students = [];
+
+        //function that will run when our submit button is clicked
+        let run = (event) => {
+
+            //prevent default reload of page with form submission
+            //shown in case of check boxes
+            event.preventDefault();
+
+            //create variables to hold each value in form
+            let stuName = document.getElementById('stuName').value;
+            let height = document.getElementById('height').value;
+            let id = document.getElementById('id').value;
+            let favColor = document.getElementById('fav color').value;
+
+            //create an object to store data from in
+            let student = {
+                stuName: stuName,
+                height: height, 
+                id: id,
+                favColor: favColor
+            }
+
+            //add created object to array of all students
+            students.push(student);
+
+            //reset form through accessing form from dom
+            document.forms[0].reset();
+
+            //log student array to console
+            console.log(students);
+
+            //save to local storage call JSON.Stringify
+            //to turn obj into a string
+            localStorage.setItem('studentList', JSON.stringify(students));
+
+            //Once all DOM content officially loaded we will use event listener
+            //to call the run function defined on line 58
+            document.addEventListener('DOMContentLoaded', () => {
+                document.getElementById('btn').addEventListener('click', run);
+            })
+        }
+    </script>
 
     <script src="objects.js"></script>
     <script src="calc.js"></script>

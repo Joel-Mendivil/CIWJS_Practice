@@ -195,4 +195,4 @@ class Circle {
         this.circumference = 2 * (3.14) * radius;
     }
 }
-const circ = new Circle();   
+const circ = new Circle();
